@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>3</title>
+</head>
+<body>
+<div th:replace="naw_bar::nawbar"></div>
+    <div>
+
+        <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+            <br>
+            <button><a th:href="@{/boba/create}">Create</a></button>
+        </div>
+
+        <p>===============================</p>
+
+        <th:block th:each="boba:${boba}">
+            <div>
+                <p>Вкус шариков: <strong th:text="${boba.getBoba_description()}"></strong></p>
+                <p>Цена: <strong th:text="${boba.getPrice()}"></strong></p>
+
+                <a th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                    <button><a th:href="@{'/boba/delete/'+${boba.id_boba}}">Удалить</a></button>
+                </a>
+
+                <a th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                    <button><a th:href="@{'/boba/edit/'+${boba.id_boba}}">Редактировать</a></button>
+                </a>
+
+                <p>===================================</p>
+
+            </div>
+        </th:block>
+    </div>
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Tooplate's Little Fashion - Sign In Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+    <link href="/assets/styles/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/assets/styles/bootstrap-icons.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/assets/styles/slick.css"/>
+    <link href="/assets/styles/tooplate-little-fashion.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+    <div th:replace="naw_bar::nawbar"></div>
+    <section class="sign-in-form section-padding">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-8 mx-auto col-12">
+
+
+                    <div class="row">
+                        <div class="col-lg-8 col-11 mx-auto">
+                            <form action="#" th:action="@{/tea_boba/create}" th:object="${tea}" method="post">
+
+                                <input type="hidden" th:field="*{teaId}" />
+
+                                    <th:block th:each="tea:${tea}">
+
+                                            <h2 class="text-center mb-5"><span><input  class="checkbox" type="checkbox" th:field="*{name}"
+                                            th:text="${tea.getName()}" th:value="${tea.name}"></span></h2>
+
+                                    </th:block>
+
+
+                                <div style="display: none;">
+                                    <label class="label"><b>Вкус:</b></label>
+                                    <th:block th:each="tea:${tea}">
+                                        <div>
+                                            <input class="checkbox" type="checkbox" th:field="*{description}" th:text="${tea.description}" th:value="${tea.description}"/>
+                                        </div>
+                                    </th:block>
+                                </div>
+
+                                <div style="display: none;">
+                                    <label class="label"><b>Основа:</b></label>
+                                    <th:block th:each="base:${tea.getBase()}">
+                                        <div>
+                                            <input class="checkbox" type="checkbox" th:field="*{base}" th:text="${base.base_description}" th:value="${base.id_base}"/>
+                                        </div>
+                                    </th:block>
+                                </div>
+
+
+
+
+                                <div class="row">
+                                    <th:block th:each="boba:${boba}">
+                                        <div class="col-lg-4 mb-4 col-12">
+                                            <div class="team-thumb d-flex align-items-center">
+                                                <div>
+                                                    <h6>
+                                                        <input class="radio" type="radio" th:id="${'boba-' + boba.id_boba}" th:name="bobaIds" th:value="${boba.id_boba}" />
+                                                        <label th:for="${'boba-' + boba.id_boba}" th:text="${boba.boba_description}"></label>
+                                                    </h6>
+                                                </div>
+                                                <div class="radio-info">
+                                                    <p th:text="${boba.getPrice()}">тут цена</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </th:block>
+                                </div>
+
+
+                                <div class="form-floating mb-4 p-0">
+                                    <input type="number" name="quantity" id="quantity" class="form-control" placeholder="quantity"   required>
+                                    <label for="quantity">Укажите количество:</label>
+                                </div>
+
+
+                                <button type="submit" name="submit" class="btn custom-btn form-control mt-4 mb-3">
+                                    Добавить в корзину
+                                </button>
+
+                            </form>
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+<!--<div class="container">
+    <form action="#" th:action="@{/tea_boba/create}" th:object="${tea}" method="post">
+        <div>
+
+            &lt;!&ndash;<div>
+                <label for="order_id">Выберите номер заказа:</label>
+                <select id="order_id" name="order_id">
+                    <option th:each="order_number : ${order_number}" th:value="${order_number.id_order}" th:text="${order_number.id_order}"></option>
+                </select>
+            </div>&ndash;&gt;
+
+            &lt;!&ndash;<h1>Create Tea Boba</h1>
+            <p><a href="/tea">Вернуться на главную</a></p>&ndash;&gt;
+            <input type="hidden" th:field="*{teaId}" />
+            <div>
+               &lt;!&ndash; <label class="label"><b>Название чая:</b></label>&ndash;&gt;
+                <th:block th:each="tea:${tea}">
+                    <div>
+                        <div >
+                            <h2><input  class="checkbox" type="checkbox" th:field="*{name}"
+                                        th:text="${tea.getName()}" th:value="${tea.name}"></h2>
+                        </div>
+                    </div>
+                </th:block>
+            </div>
+
+            <div style="display: none;">
+                <label class="label"><b>Вкус:</b></label>
+                <th:block th:each="tea:${tea}">
+                    <div>
+                        <input class="checkbox" type="checkbox" th:field="*{description}" th:text="${tea.description}" th:value="${tea.description}"/>
+                    </div>
+                </th:block>
+            </div>
+
+            <div style="display: none;">
+                <label class="label"><b>Основа:</b></label>
+                <th:block th:each="base:${tea.getBase()}">
+                    <div>
+                        <input class="checkbox" type="checkbox" th:field="*{base}" th:text="${base.base_description}" th:value="${base.id_base}"/>
+                    </div>
+                </th:block>
+            </div>
+
+
+
+            <div>
+                <label class="label"><b>Вкусы шариков:</b></label>
+                <br><br>
+                <th:block th:each="boba:${boba}">
+                    <div>
+                        <input class="radio" type="radio" th:id="${'boba-' + boba.id_boba}" th:name="bobaIds" th:value="${boba.id_boba}" />
+                        <label th:for="${'boba-' + boba.id_boba}"
+                               th:text="${boba.boba_description}"></label>  <strong th:text="${boba.getPrice()}"></strong>
+                    </div>
+                </th:block>
+            </div>
+
+            <br>
+            <label for="quantity">Укажите количество:</label>
+            <input type="number" id="quantity" name="quantity" required>
+
+            <p><div><button type="submit">Create</button></div></p>
+        </div>
+    </form>
+</div>-->
+
+
+
+
+</body>
+</html>
+
+
+
+<script type="application/javascript" src="/assets/js/jquery.min.js"></script>
+<script type="application/javascript" src="/assets/js/bootstrap.bundle.min.js"></script>
+<script type="application/javascript" src="/assets/js/Headroom.js"></script>
+<script type="application/javascript" src="/assets/js/jQuery.headroom.js"></script>
+<script type="application/javascript" src="/assets/js/slick.min.js"></script>
+<script type="application/javascript" src="/assets/js/custom.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+       var teamThumbs = document.querySelectorAll('.team-thumb');
+
+       teamThumbs.forEach(function (thumb) {
+           thumb.addEventListener('click', function () {
+               // Remove 'selected' class from all team-thumbs
+               teamThumbs.forEach(function (t) {
+                   t.classList.remove('selected');
+               });
+
+               // Add 'selected' class to the clicked team-thumb
+               thumb.classList.add('selected');
+
+               var radio = thumb.querySelector('.radio');
+               if (radio) {
+                   radio.checked = true;
+               }
+           });
+       });
+   });
+</script>
+
+<style>
+    .checkbox {
+        display: none; /* Скрыть чекбокс */
+    }
+
+
+    input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Фикс для Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+
+   .team-thumb {
+        display: flex;
+        flex-direction: column; /* Display child elements in a column layout */
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        padding: 10px; /* Adjust padding as needed */
+        border: 1px solid #ccc; /* Add a border for visual separation */
+        border-radius: 5px; /* Add border-radius for rounded corners */
+        transition: background-color 0.3s ease; /* Add smooth transition effect */
+    }
+
+    .team-thumb.selected {
+        background-color: #f0f0f0; /* Add a different background color for the selected block */
+    }
+
+    .radio-info {
+        margin-top: 10px; /* Add margin to separate the flavor and price */
+        text-align: center; /* Center-align the text within .radio-info */
+    }
+
+    .radio {
+        opacity: 0; /* Hide the radio button visually */
+        position: absolute; /* Optional: move the hidden radio off-screen */
+    }
+</style>
+
+

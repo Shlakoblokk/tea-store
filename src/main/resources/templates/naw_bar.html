@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Tooplate's Little Fashion - Sign In Page</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+  <link href="/assets/styles/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="/assets/styles/bootstrap-icons.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" type="text/css" href="/assets/styles/slick.css"/>
+  <link href="/assets/styles/tooplate-little-fashion.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+
+
+<div th:fragment="nawbar">
+
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+
+
+
+    <a class="navbar-brand" href="/tea">
+      <strong><span>BOBA's</span> TEA</strong>
+    </a>
+
+    <div class="d-lg-none">
+      <a th:if="${#authorization.expression('!isAuthenticated()')}" href="/login">Войти/Зарегестрироваться</a>
+
+      <a th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}" href="/tea_boba">
+        Корзина
+      </a>
+      <a th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}" href="/orders" >
+        Аккаунт
+      </a>
+
+      <a th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" href="/user">
+        Аккаунт
+      </a>
+
+
+
+
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mx-auto">
+
+      </ul>
+
+
+      <div class="d-none d-lg-block">
+
+
+
+          <a th:if="${#authorization.expression('!isAuthenticated()')}" href="/login">Войти/Зарегестрироваться</a>
+
+
+        <a th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}" href="/tea_boba">
+         Корзина
+        </a>
+          <a th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}" href="/orders" >
+            Аккаунт
+          </a>
+
+
+
+          <a th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" href="/user">
+           Аккаунт
+          </a>
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+
+
+
+ <!-- <div>
+
+
+      <br>
+    <div>
+      <a href="/tea">Чай</a>
+
+      <a th:if="${not #authorization.expression('hasRole(''ROLE_ADMIN'')')}" href="/tea_boba">Корзина</a>
+      <a th:if="${not #authorization.expression('hasRole(''ROLE_ADMIN'')')}" href="/orders">Заказы</a>
+
+      <a th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" href="/boba">Шарики</a>
+      <a th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" href="/base">Основа для чая</a>
+    </div>
+
+      <br>
+
+    <div>
+      <div th:if="${#authorization.expression('!isAuthenticated()')}">
+        &lt;!&ndash;<a href="/registration">Зарегистрироваться</a>&ndash;&gt;
+        <a href="/login">Войти</a>
+      </div>
+      <div th:if="${#authorization.expression('isAuthenticated')}">
+        <a href="/user" >Аккаунт </a>
+      </div>
+    </div>
+    &lt;!&ndash;<a href="/ordercontent">ordercontent</a>&ndash;&gt;
+  </div>-->
+</div>
+
+
+<script type="application/javascript" src="/assets/js/jquery.min.js"></script>
+<script type="application/javascript" src="/assets/js/bootstrap.bundle.min.js"></script>
+<script type="application/javascript" src="/assets/js/Headroom.js"></script>
+<script type="application/javascript" src="/assets/js/jQuery.headroom.js"></script>
+<script type="application/javascript" src="/assets/js/slick.min.js"></script>
+<script type="application/javascript" src="/assets/js/custom.js"></script>
+</body>
+</html>

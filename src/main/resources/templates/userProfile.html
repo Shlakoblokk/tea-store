@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Tooplate's Little Fashion - Sign In Page</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+  <link href="/assets/styles/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="/assets/styles/bootstrap-icons.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" type="text/css" href="/assets/styles/slick.css"/>
+  <link href="/assets/styles/tooplate-little-fashion.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+
+
+
+
+<main>
+  <div th:replace="naw_bar::nawbar"></div>
+  <section class="sign-in-form section-padding">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-lg-8 mx-auto col-12">
+
+          <h2 class="text-center mb-5"><span>Профиль</span></h2>
+
+          <div class="row">
+            <div class="col-lg-8 col-11 mx-auto">
+              <form th:action="@{/user}" method="post" th:object="${user}">
+
+
+                <input type="hidden" id="id_user" name="id_user" th:value="${user.id_user}" />
+
+
+
+                <div class="form-floating mb-4 p-0">
+                  <input type="text" th:value="${user.name}" name="name" id="name" class="form-control" placeholder="name" required>
+                  <label for="name">Логин</label>
+                </div>
+                <div class="form-floating p-0">
+                  <input type="text" name="email" th:value="${user.email}" id="email" class="form-control" placeholder="email" required>
+                  <label for="email">Почта</label>
+                </div>
+
+                <button type="submit" name="submit" class="btn custom-btn form-control mt-4 mb-3">
+                  Сохранить изменения
+                </button>
+                <p class="text-center"><strong><a href="/logout">Выйти из аккаунта</a></strong></p>
+
+              </form>
+
+              <form action="/user/delete" method="post">
+                <p class="text-center" type="submit" onclick="return confirm('Вы уверены, что хотите удалить свой аккаунт?')">Удалить аккаунт</p>
+              </form>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+
+
+
+
+
+
+<!--<h1>User Profile</h1>
+<a href="/tea">Вернуться на главную</a>
+  <br><br>-->
+<!--<form th:action="@{/user}" method="post" th:object="${user}">-->
+  <!--<p>Username: <strong th:text="${user.name}"></strong></p>
+  <p>Email: <strong th:text="${user.email}"></strong></p>-->
+
+  <!--<input type="hidden" id="id_user" name="id_user" th:value="${user.id_user}" />-->
+
+  <!--<p><label for="username">Username:</label>
+  <input type="text" id="username" name="username" th:value="${user.name}" required /></p>
+  <p><label for="email">Email:</label>
+  <input type="email" id="email" name="email" th:value="${user.email}" required /></p>-->
+
+ <!-- <p><label for="name">Name:</label>
+  <input type="text" id="name" name="name" th:field="*{name}" /></p>
+
+  <p><label for="email">Email:</label>
+  <input type="text" id="email" name="email" th:field="*{email}" /></p>
+
+  <button type="submit">Сохранить изменения</button>
+
+  <p class="text-center"><strong><a href="/tea">Вернуться на главную</a></strong></p>
+
+  <div th:if="${#authorization.expression('isAuthenticated')}">
+    <br><br>
+    <a href="/logout">Logout</a>
+  </div>-->
+<!--<br>
+
+</form>
+
+<form action="/user/delete" method="post">
+  <button type="submit" onclick="return confirm('Вы уверены, что хотите удалить свой аккаунт?')">Удалить аккаунт</button>
+</form>-->
+</body>
+</html>

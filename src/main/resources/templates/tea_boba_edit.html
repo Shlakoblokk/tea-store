@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<h2>Редактирование чая с шариками</h2>
+
+<form action="/tea_boba/edit/" method="post" th:object="${teaBoba}">
+
+    <input type="hidden" th:field="*{id}" />
+
+    <p>Чай: <strong th:text="${teaBoba.id}"></strong></p>
+
+    <div th:each="tea:${teaBoba.tea}">
+        <div>
+            <p>Название чая: <strong th:text="${tea.name}"></strong></p>
+        </div>
+    </div>
+
+    <div>
+        <label class="label"><b>Вкусы шариков:</b></label>
+        <div th:each="boba:${allBobaOptions}">
+            <div>
+                <input class="checkbox" type="checkbox" th:id="${'boba-' + boba.id_boba}" th:name="bobaIds"
+                       th:value="${boba.id_boba}" th:checked="${teaBoba.boba != null && boba.id_boba == teaBoba.boba.id_boba}" />
+
+                <label th:for="${'boba-' + boba.id_boba}" th:text="${boba.boba_description}"></label>
+            </div>
+        </div>
+    </div>
+
+    <label for="quantity">Укажите количество:</label>
+    <input type="number" th:field="*{quantity}" id="quantity" name="quantity" required>
+
+    <p> <button type="submit">Сохранить изменения</button></p>
+</form>
+
+</body>
+</html>

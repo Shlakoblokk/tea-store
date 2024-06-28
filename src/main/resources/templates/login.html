@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Tooplate's Little Fashion - Sign In Page</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+  <link href="/assets/styles/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="/assets/styles/bootstrap-icons.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" type="text/css" href="/assets/styles/slick.css"/>
+  <link href="/assets/styles/tooplate-little-fashion.css" type="text/css" rel="stylesheet">
+</head>
+
+
+<body>
+
+
+<!--<center>
+  <h1>Login</h1>
+  <form method="POST" action="/login">
+    User Name : <input type="text" name="username"/><br><br>
+    Password  : <input type="password" name="password"/><br><br>
+    <input type="submit" name="submit"/>
+  </form>
+    <br>
+    <a href="/registration">Зарегистрироваться</a>
+    <br><br>
+    <a href="/tea">Вернуться на главную</a>
+</center>-->
+
+
+
+
+<!--<section class="preloader">
+  <div class="spinner">
+    <span class="sk-inner-circle"></span>
+  </div>
+</section>-->
+
+<main>
+
+  <section class="sign-in-form section-padding">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-lg-8 mx-auto col-12">
+
+          <h2 class="text-center mb-5"><span>Вход</span></h2>
+
+          <div class="row">
+            <div class="col-lg-8 col-11 mx-auto">
+              <form method="POST" action="/login">
+
+                <div class="form-floating mb-4 p-0">
+                  <input type="login" name="username" id="login" class="form-control" placeholder="login" required>
+                  <label for="login">Логин</label>
+                </div>
+                <div class="form-floating p-0">
+                  <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
+                  <label for="password">Пароль</label>
+                </div>
+
+
+
+                <button type="submit" name="submit" class="btn custom-btn form-control mt-4 mb-3">
+                  Войти
+                </button>
+              </form>
+                <p class="text-center">Еще нет аккаунта? <strong><a href="/registration">Создать аккаунт</a></strong></p>
+                <p class="text-center"><strong><a href="/tea">Вернуться на главную</a></strong></p>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+</body>
+</html>

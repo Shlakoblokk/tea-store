@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Tooplate's Little Fashion - Sign In Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+    <link href="/assets/styles/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/assets/styles/bootstrap-icons.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/assets/styles/slick.css"/>
+    <link href="/assets/styles/tooplate-little-fashion.css" type="text/css" rel="stylesheet">
+</head>
+
+
+
+<body style="background-color: #fff;">
+<div th:replace="naw_bar::nawbar"></div>
+
+<header class="site-header section-padding-img site-header-image">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-6 col-12 header-info">
+                <h1>
+                    <span class="d-block text-primary">СКОРЕЕ</span>
+                    <span class="d-block text-dark">Чай остывает!</span>
+                </h1>
+            </div>
+        </div>
+    </div>
+
+    <img src="1.png" class="header-image img-fluid" alt="">
+</header>
+
+<section class="team section-padding">
+
+
+
+        <!--ТУТ ЧАЙ-->
+
+    <div class="container">
+        <div class="row">
+
+            <h2>Ваш рецепт<span> напитка</span></h2>
+
+            <div>
+                <a th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" th:href="@{/tea/createTea}" class="orders-btn">
+                    +
+                </a>
+            </div>
+
+        <div class="base-grid-container menu-catalog">
+
+            <th:block th:each="tea:${tea}">
+                <div class="menu-item">
+                    <div class="menu-thumb d-flex align-items-center">
+                        <div class="menu-info">
+
+                            <h5 class="mb-0" th:text="${tea.getName()}">Название чая</h5>
+
+
+                            <th:block th:each="base:${tea.getBase()}">
+                                <h6 th:text="${base.getBase_description()}">Основа</h6>
+                            </th:block>
+
+                            <strong th:text="${tea.getDescription()}" class="text-muted">Вкус</strong>
+                            <p th:text="${tea.getPrice()}" class="text-muted">150</p>
+
+                                <div>
+                                    <a class="orders-btn" th:if="${#authorization.expression('hasRole(''USER'')')}" th:href="@{'/tea_boba/create/'+${tea.teaId}}">
+                                        +
+                                    </a>
+                                </div>
+
+
+
+                            <h6 th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                                <p><strong>
+                                    <a th:href="@{'/tea/edit/'+${tea.teaId}}">
+                                        Редактировать
+                                    </a>
+                                </strong></p>
+                                <p><strong>
+                                    <a th:href="@{'/tea/delete/'+${tea.teaId}}">
+                                        Удалить
+                                    </a>
+                                </strong></p>
+                            </h6>
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </th:block>
+        </div>
+        </div>
+    </div>
+
+
+
+    <br><br>
+
+
+        <!--ТУТ ШАРИКИ-->
+
+    <div class="container">
+        <div class="row">
+
+
+            <h2>Узнай какие<span> шарики</span> ты можешь выбрать</h2>
+            <div>
+                <a th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" th:href="@{/boba/create}" class="orders-btn">
+                    +
+                </a>
+            </div>
+
+            <div class="base-grid-container menu-catalog">
+
+            <th:block th:each="boba:${boba}">
+                <div class="menu-item">
+                    <div class="menu-thumb d-flex align-items-center">
+                        <div class="menu-info">
+
+                            <h5 class="mb-0" th:text="${boba.getBoba_description()}"></h5>
+                            <strong th:text="${boba.getPrice()}" class="text-muted"></strong>
+
+
+                            <div  class="button-container" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                                <a th:href="@{'/boba/edit/'+${boba.id_boba}}">
+                                    <button type="submit" class="order-btn">
+                                        Редактировать
+                                    </button>
+                                </a>
+                                <a th:href="@{'/boba/delete/'+${boba.id_boba}}">
+                                    <button type="submit" class="order-btn">
+                                        Удалить
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </th:block>
+            </div>
+        </div>
+    </div>
+
+
+
+
+        <!--ТУТ ОСНОВА ДЛЯ НАПИТКА-->
+
+    <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" class="container">
+        <br><br>
+        <div class="row">
+
+            <h2>Основа для<span> напитка</span></h2>
+
+            <div>
+                <a th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" th:href="@{/base/create}" class="orders-btn">
+                    +
+                </a>
+            </div>
+
+            <div class="base-grid-container menu-catalog">
+
+            <th:block th:each="base:${base}">
+                <div class="menu-item">
+                    <div class="menu-thumb d-flex align-items-center">
+                        <div class="menu-info">
+
+                            <h5 class="mb-0" th:text="${base.getBase_description()}"></h5>
+
+                            <div  class="button-container" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                                <a th:href="@{'/base/edit/'+${base.id_base}}">
+                                    <button type="submit" class="order-btn">
+                                        Редактировать
+                                    </button>
+                                </a>
+                                <a th:href="@{'/base/delete/'+${base.id_base}}">
+                                    <button type="submit" class="order-btn">
+                                        Удалить
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </th:block>
+            </div>
+        </div>
+    </div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<section class="about section-padding">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-12 text-center">
+                <h2 class="mb-5">Пару слов <span>о НАС</span></h2>
+            </div>
+
+            <div class="col-lg-2 col-12 mt-auto mb-auto">
+                <ul class="nav nav-pills mb-5 mx-auto justify-content-center align-items-center" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">  Информация  </button>
+                    </li>
+
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pills-youtube-tab" data-bs-toggle="pill" data-bs-target="#pills-youtube" type="button" role="tab" aria-controls="pills-youtube" aria-selected="true">Как мы работаем</button>
+                    </li>
+
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pills-skill-tab" data-bs-toggle="pill" data-bs-target="#pills-skill" type="button" role="tab" aria-controls="pills-skill" aria-selected="false">Режим работы</button>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-lg-10 col-12">
+                <div class="tab-content mt-2" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+
+                        <div class="row">
+                            <div class="col-lg-7 col-12">
+                                <img src="2.jpg" class="img-fluid" alt="">
+                            </div>
+
+                            <div class="col-lg-5 col-12">
+                                <div class="d-flex flex-column h-100 ms-lg-4 mt-lg-0 mt-5">
+                                    <h4 class="mb-3">О продукте <br><span> BOBA's</span> TEA</h4>
+
+                                    <p>Мы создаем уникальный продукт - каждый наполненный частичкой души и приготовленный по Вашему рецепту. Чтобы не потерять друг друга и ваши идеи, войдите в аккаунт <br><h6></h6></br> </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="pills-youtube" role="tabpanel" aria-labelledby="pills-youtube-tab">
+
+                        <div class="row">
+                            <div class="col-lg-7 col-12">
+                                <img src="3.png" class="img-fluid" alt="">
+                            </div>
+
+                            <div class="col-lg-5 col-12">
+                                <div class="d-flex flex-column h-100 ms-lg-4 mt-lg-0 mt-5">
+                                    <h4 class="mb-3">Процесс</h4>
+
+                                    <p>Мы готовим на открытой кухне</p>
+
+                                    <p>Почему мы готовим без перчаток? Бобы - жемчужинки разных вкусов, боятся перчаток и все время убегают(</p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="pills-skill" role="tabpanel" aria-labelledby="pills-skill-tab">
+                        <div class="row">
+                            <div class="col-lg-7 col-12">
+                                <img src="5.png" class="img-fluid" alt="">
+                            </div>
+
+                            <div class="col-lg-5 col-12">
+                                <div class="d-flex flex-column h-100 ms-lg-4 mt-lg-0 mt-5">
+                                    <h4 class="mb-3">Боб ждет вас</h4>
+
+                                    <p>Мы работаем с 9:00 до 23:00, а после колдуем на кухне и готовимся радовать Вас снова!</p>
+
+                                    <div class="skill-thumb mt-3">
+
+                                        <strong>Положительные отзывы</strong>
+                                        <span class="float-end">100%</span>
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%;"></div>
+                                        </div>
+
+                                        <strong>Качество напитка</strong>
+                                        <span class="float-end">100%</span>
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%;"></div>
+                                        </div>
+
+                                        <strong>Оценка дизайна</strong>
+                                        <span class="float-end">100%</span>
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;"></div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+<section class="front-product">
+    <div class="container-fluid p-0">
+        <div class="row align-items-center">
+
+            <div class="col-lg-6 col-12">
+                <img src="4.jpg" class="img-fluid" alt="">
+            </div>
+
+            <div class="col-lg-6 col-12">
+                <div class="px-5 py-5 py-lg-0">
+
+                    <h2 class="mb-4"><span>Более 100 неповторимых вкусов</span></h2>
+
+                    <p class="lead mb-4">Даже БОБ еще не успел попробовать их все... Может быть у тебя получится?</p>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+
+
+
+
+
+<section style="background-color: #fff;" class="testimonial section-padding">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-9 mx-auto col-11">
+                <h2 class="text-center">Собери свой <br> <span>уникальный БОБА ЧАЙ,</span> по правилам БОБА:</h2>
+
+                <div class="slick-testimonial">
+                    <div class="slick-testimonial-caption">
+                        <p class="lead">Не бояться быть креативным, хотеть попробовать всего и побольше! МЫ всегда рады новым идеям и уже спешим их с удовольствием воплатить в вашем волшебном напитке </p>
+
+                        <div class="slick-testimonial-client d-flex align-items-center mt-4">
+                            <img src="6.jpeg" class="img-fluid custom-circle-image me-3" alt="">
+
+                            <span> <strong class="text-muted">Команда BOBA's TEA</strong></span>
+                        </div>
+                    </div>
+
+                    <div class="slick-testimonial-caption">
+                        <p class="lead">Нет несмешиваемых сочетаний, однако сейчас фьюжн в моде. (По секрету, у нас на кухне работают не повора, а волшебники вкуса, которые смогут создать воистину необыкновенный рецепт)</p>
+
+                        <div class="slick-testimonial-client d-flex align-items-center mt-4">
+                            <img src="6.jpeg" class="img-fluid custom-circle-image me-3" alt="">
+
+                            <span><strong class="text-muted">Команда BOBA's TEA</strong></span>
+                        </div>
+                    </div>
+
+                    <div class="slick-testimonial-caption">
+                        <p class="lead">Если сегодня хочется погрустить, или повеселиться, посмеяться или поплакать, но точно никак не придумывать напитки - подберем все под ваш вкус и настрой!</p>
+
+                        <div class="slick-testimonial-client d-flex align-items-center mt-4">
+                            <img src="6.jpeg" class="img-fluid custom-circle-image me-3" alt="">
+
+                            <span><strong class="text-muted">Команда BOBA's TEA</strong></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+<th:block th:each="boba:${boba}">
+    <div>
+        <p>Вкус шариков: <strong th:text="${boba.getBoba_description()}"></strong></p>
+        <p>Цена: <strong th:text="${boba.getPrice()}"></strong></p>
+
+        <a th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+            <button><a th:href="@{'/boba/delete/'+${boba.id_boba}}">Удалить</a></button>
+        </a>
+
+        <a th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+            <button><a th:href="@{'/boba/edit/'+${boba.id_boba}}">Редактировать</a></button>
+        </a>
+
+        <p>===================================</p>
+
+    </div>
+</th:block>
+
+
+<th:block th:each="base:${base}">
+    <div>
+
+        <p>Основа для напитка: <strong th:text="${base.getBase_description()}"></strong></p>
+
+        <a th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+            <button><a th:href="@{'/base/delete/'+${base.id_base}}">Удалить</a></button>
+        </a>
+        <a th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+            <button><a th:href="@{'/base/edit/'+${base.id_base}}">Редактировать</a></button>
+        </a>
+
+        <p>===================================</p>
+
+    </div>
+</th:block>
+        <th:block th:each="tea:${tea}">
+            <div>
+                       <h2> <strong th:text="${tea.getName()}" ></strong>
+                       <strong th:text="${tea.getPrice()}"></strong></h2>
+
+                       <th:block th:each="base:${tea.getBase()}">
+                             <h3><strong th:text="${base.getBase_description()}"></strong></h3>
+                       </th:block>
+                       <p>Вкус: <h th:text="${tea.getDescription()}"></h></p>
+
+                <div>
+                    <button th:if="${not #authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                        <a th:href="@{'/tea_boba/create/'+${tea.teaId}}">Выбрать для заказа</a>
+                    </button>
+
+                    <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                        <button><a th:href="@{'/tea/edit/'+${tea.teaId}}">Редактировать</a></button>
+                        <button><a th:href="@{'/tea/delete/'+${tea.teaId}}">Удалить</a></button>
+                    </div>
+                     <p>===============================</p>
+                </div>
+            </div>
+       </th:block>
+-->
+
+
+
+<script type="application/javascript" src="/assets/js/jquery.min.js"></script>
+<script type="application/javascript" src="/assets/js/bootstrap.bundle.min.js"></script>
+<script type="application/javascript" src="/assets/js/Headroom.js"></script>
+<script type="application/javascript" src="/assets/js/jQuery.headroom.js"></script>
+<script type="application/javascript" src="/assets/js/slick.min.js"></script>
+<script type="application/javascript" src="/assets/js/custom.js"></script>
+
+
+
+
+
+<style>
+button {
+padding: 10px 20px; /* Adjust padding as needed */
+border: none;
+border-radius: 5px; /* Rounded corners */
+font-size: 16px; /* Adjust font size as needed */
+cursor: pointer;
+transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f5f5f5; /* Light gray background */
+    margin: 0;
+    padding: 0;
+}
+
+/* Navigation bar styles */
+/* Add styles for your navigation bar if needed */
+
+/* Menu section styles */
+.menu-section {
+    background-color: #ffffff; /* White background for the menu section */
+    padding: 20px; /* Adjust padding as needed */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow for a card-like effect */
+}
+
+.base-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Adjust column width as needed */
+    gap: 20px; /* Adjust gap between items as needed */
+    margin: 20px 0;
+}
+
+
+.title-container {
+    display: flex;
+    align-items: center;
+}
+
+.title-container h5 {
+    margin-right: 60px; /* Adjust the margin as needed */
+}
+
+.text-muted {
+    /* Styles for the text */
+    color: #666;
+    /* Add any other styles you want for the text */
+}
+
+
+.menu-item {
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.menu-item:hover {
+    transform: scale(1.05);
+}
+
+.menu-thumb {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px 10px 0 0;
+}
+
+.menu-thumb img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.menu-info {
+    padding: 20px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+
+}
+
+
+.order-btn {
+    background-color: #ffffff; /* White background */
+    color: #333333; /* Dark text color */
+    border: 2px solid #cccccc; /* Gray border */
+    padding: 10px 20px; /* Adjust padding as needed */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.order-btn:hover {
+
+    color: #555555; /* Darker text color on hover */
+    border-color: #999999; /* Darker gray border on hover */
+}
+
+
+    .orders-btn {
+        background-color: #F6768E; /* Change the background color as needed */
+        color: #fff; /* Change the text color as needed */
+        border: none;
+        border-radius: 50%; /* Create a circular button */
+        width: 50px; /* Adjust the width and height as needed */
+        height: 50px;
+        font-size: 24px; /* Adjust the font size as needed */
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+    }
+
+    .orders-btn:hover {
+        background-color: #fff; /* Change the hover background color as needed */
+    }
+</style>

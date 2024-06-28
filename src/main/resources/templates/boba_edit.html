@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Tooplate's Little Fashion - Sign In Page</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+  <link href="/assets/styles/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="/assets/styles/bootstrap-icons.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" type="text/css" href="/assets/styles/slick.css"/>
+  <link href="/assets/styles/tooplate-little-fashion.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+
+<main>
+  <div th:replace="naw_bar::nawbar"></div>
+  <section class="sign-in-form section-padding">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-lg-8 mx-auto col-12">
+
+          <h2 class="text-center mb-5"><span>Редактирование шарков</span></h2>
+          <!--<h1 class="hero-title text-center mb-5">Редактирование шариков</h1>-->
+
+          <div class="row">
+            <div class="col-lg-8 col-11 mx-auto">
+
+              <form action="#" th:action="@{/boba/edit}" th:object="${boba}" method="post">
+                <input type="hidden" th:field="*{id_boba}" />
+
+                <div class="form-floating mb-4 p-0">
+                  <input class="form-control" type="text" th:field="*{boba_description}" id="boba_description" placeholder="boba_description">
+                  <label class="label" for="boba_description">Вкус шариков:</label>
+                </div>
+
+                <div class="form-floating mb-4 p-0">
+                  <input class="form-control" type="text" th:field="*{price}" id="price" placeholder="price">
+                  <label class="label" for="price">Цена:</label>
+                </div>
+
+                <button type="submit" name="submit" class="btn custom-btn form-control mt-4 mb-3">
+                  Редактировать
+                </button>
+
+              </form>
+
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+<div class="container">
+  <form action="#" th:action="@{/boba/edit}" th:object="${boba}" method="post">
+    <div>
+      <h1>Edit Tea</h1>
+      <input type="hidden" th:field="*{id_boba}" />
+      <div>
+        <label class="label" for="boba_description">Вкус шариков:</label>
+        <input class="input" type="text" th:field="*{boba_description}" id="boba_description" placeholder="boba_description">
+      </div>
+      <br/>
+      <div>
+        <label class="label" for="price">Цена:</label>
+        <input class="input" type="text" th:field="*{price}" id="price" placeholder="price">
+      </div>
+    </div>
+    <p><div><button type="submit">Edit</button></div></p>
+  </form>-->
+
+
+ <!--   <div>
+      <p>Вкус шариков: <strong th:text="${boba.getBoba_description()}"></strong></p>
+      <p>Цена ........... <strong th:text="${boba.getPrice()}"></strong></p>
+    </div>-->
+
+
+
+</div>
+
+
+
+
+</body>
+</html>

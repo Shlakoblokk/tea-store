@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>2</title>
+</head>
+<body>
+<div th:replace="naw_bar::nawbar"></div>
+    <div>
+        <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+            <br>
+            <button><a th:href="@{/base/create}">Create</a></button>
+        </div>
+
+        <p>===================================</p>
+
+        <th:block th:each="base:${base}">
+            <div>
+
+                <p>Основа для напитка: <strong th:text="${base.getBase_description()}"></strong></p>
+
+                <a th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                    <button><a th:href="@{'/base/delete/'+${base.id_base}}">Удалить</a></button>
+                </a>
+                <a th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                    <button><a th:href="@{'/base/edit/'+${base.id_base}}">Редактировать</a></button>
+                </a>
+
+                <p>===================================</p>
+
+            </div>
+        </th:block>
+    </div>
+</body>
+</html>
